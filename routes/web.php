@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('admin')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::get('/', 'DashboardController@index')->name('admin');
+        Route::resource('student', 'StudentController');
+        Route::post('/student/import', 'StudentController@import')->name(
+            'student.import'
+        );
+    });
 
-
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/', function () {
-    return view('pages.admin.dashboard');
+    return view('pages.home');
 });
-Route::resource('student', 'StudentController');
-Route::post('/student/import', 'StudentController@import')->name('student.import');

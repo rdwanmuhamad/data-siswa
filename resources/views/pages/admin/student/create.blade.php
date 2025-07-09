@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('style')
     <script src="{{ asset('assets/assets/js/plugin/webfont/webfont.min.js') }}"></script>
