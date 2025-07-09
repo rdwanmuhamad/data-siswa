@@ -81,7 +81,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $item = Student::findOrFail($id);
+        $item->update($data);
+        // Alert::toast('Data berhasil diubah!', 'success');
+        return redirect()->route('student.index');
     }
 
     /**

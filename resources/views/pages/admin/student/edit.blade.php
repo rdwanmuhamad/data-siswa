@@ -55,8 +55,9 @@
                     </li>
                 </ul>
             </div>
-            <form role="form" action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data"
+            <form role="form" action="{{ route('student.update', $item->id) }}" method="POST" enctype="multipart/form-data"
                 id="locations">
+                @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -70,7 +71,7 @@
                                         <div class="form-group">
                                             <label for="name">Nama</label>
                                             <input type="text" name="name"
-                                                class="form-control  @error('name') is-invalid @enderror" required>
+                                                class="form-control  @error('name') is-invalid @enderror" required value="{{ $item->name }}">
                                             @error('name')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
@@ -80,7 +81,7 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email"
-                                                class="form-control  @error('email') is-invalid @enderror" required>
+                                                class="form-control  @error('email') is-invalid @enderror" required value="{{ $item->email }}">
                                             @error('email')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
