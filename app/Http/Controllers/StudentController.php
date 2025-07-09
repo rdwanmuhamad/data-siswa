@@ -66,7 +66,10 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Student::findOrFail($id);
+        return view('pages.admin.student.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -89,7 +92,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Student::findorFail($id);
+        $item->delete();
+        
+        return redirect()->route('student.index');
     }
 
     public function import(Request $request)
