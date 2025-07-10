@@ -19,6 +19,7 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
         Route::get('/', 'DashboardController@index')->name('admin');
+        Route::resource('user', 'UserController');
         Route::resource('student', 'StudentController');
         Route::post('/student/import', 'StudentController@import')->name(
             'student.import'

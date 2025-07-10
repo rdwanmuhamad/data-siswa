@@ -17,6 +17,9 @@
         @include('includes.sidebar')
         <!-- End Sidebar -->
 
+        {{-- sweet alert --}}
+        @include('sweetalert::alert')
+        
         <div class="main-panel">
             <div class="main-header">
                 <div class="main-header-logo">

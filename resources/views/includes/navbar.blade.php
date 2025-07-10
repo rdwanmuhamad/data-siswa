@@ -226,7 +226,8 @@
                 <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                     aria-expanded="false">
                     <div class="avatar-sm">
-                        <img src="{{ asset('assets/assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle" />
+                        <img src="{{ asset('assets/assets/img/profile.jpg') }}" alt="..."
+                            class="avatar-img rounded-circle" />
                     </div>
                     <span class="profile-username">
                         <span class="op-7">Hi,</span>
@@ -256,7 +257,11 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Account Setting</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form action="{{ route('logout') }}" method="post" id="logout-form">
+                                @csrf
+                            </form>
                         </li>
                     </div>
                 </ul>
