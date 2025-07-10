@@ -14,26 +14,44 @@
     <link href="{{ asset('assets/frontend/assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/frontend/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css">
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/frontend/assets/css/main.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-    <section id="hero" class="hero section">
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-            data-aos="zoom-out">
-            <img src="{{ asset('assets/frontend/assets/img/hero-img.svg') }}" class="img-fluid animated" alt="">
-            <h1>Welcome to <span>HeroBiz</span></h1>
-            <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
-            <div class="d-flex">
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
-                    class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch
-                        Video</span></a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="example" class="display">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+                        @foreach ($students as $student)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $student->nis }}</td>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->email }}</td>
+                                <td>{{ $student->status }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-    </section><!-- /Hero Section -->
+    </div>
 @endsection
 
 @section('script')
@@ -48,4 +66,13 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('assets/frontend/assets/js/main.js') }}"></script>
+
+    <!-- Datatables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+    {{-- <script src="{{ asset('assets/assets/js/plugin/datatables/datatables.min.js') }}"></script> --}}
+
+    <script>
+        $('#example').DataTable();
+    </script>
 @endsection

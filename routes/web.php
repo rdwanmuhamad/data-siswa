@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/student', 'HomeController@student')->name('student');
+
 
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
