@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\StudentImport;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
@@ -43,7 +44,7 @@ class StudentController extends Controller
     {
         $data = $request->all();
         Student::create($data);
-        // Alert::toast('Data berhasil disimpan!', 'success');
+        Alert::toast('Data berhasil disimpan!', 'success');
         return redirect()->route('student.index');
     }
 
@@ -84,7 +85,7 @@ class StudentController extends Controller
         $data = $request->all();
         $item = Student::findOrFail($id);
         $item->update($data);
-        // Alert::toast('Data berhasil diubah!', 'success');
+        Alert::toast('Data berhasil diubah!', 'success');
         return redirect()->route('student.index');
     }
 
