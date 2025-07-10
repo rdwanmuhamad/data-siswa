@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'HomeController@index')->name('home');
+
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function () {
@@ -25,6 +27,3 @@ Route::prefix('admin')
 
 Auth::routes(['register' => false]);
 
-Route::get('/', function () {
-    return view('pages.home');
-});
