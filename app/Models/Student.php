@@ -18,7 +18,8 @@ class Student extends Model
         'address',
         'provinces_id',
         'regencies_id',
-        'number_phone'
+        'number_phone',
+        'status'
     ];
 
     protected $hidden = [

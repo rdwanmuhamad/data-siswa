@@ -138,6 +138,20 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status">Status</label>
+                                            <select name="status" class="form-control @error('status') is-invalid @enderror"
+                                                required>
+                                                <option value="">Pilihan</option>
+                                                <option value="Aktif">Aktif</option>
+                                                <option value="Tidak Aktif">Tidak Aktif</option>
+                                            </select>
+                                            @error('status')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-action">
                                     <button class="btn btn-success" type="submit">Submit</button>

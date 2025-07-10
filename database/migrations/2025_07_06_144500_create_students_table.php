@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->integer('provinces_id');
             $table->integer('regencies_id');
             $table->string('number_phone');
+            $table->string('status');
             $table->timestamps();
         });
     }

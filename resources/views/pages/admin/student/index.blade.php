@@ -74,17 +74,17 @@
                                     <button type="button" class="btn btn-label-success btn-round btn-sm me-2"
                                         onclick="thisFileUpload()">
                                         <span class="btn-label">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-print"></i>
                                         </span>
                                         Import
                                     </button>
                                 </form>
-                                <a href="#" class="btn btn-label-info btn-round btn-sm">
+                                {{-- <a href="#" class="btn btn-label-info btn-round btn-sm">
                                     <span class="btn-label">
                                         <i class="fa fa-print"></i>
                                     </span>
                                     Print
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -93,8 +93,10 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
+                                            <th>NIS</th>
                                             <th>Nama</th>
                                             <th>Email</th>
+                                            <th>Status</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
@@ -105,8 +107,10 @@
                                         @foreach ($students as $student)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
+                                                <td>{{ $student->nis }}</td>
                                                 <td>{{ $student->name }}</td>
                                                 <td>{{ $student->email }}</td>
+                                                <td>{{ $student->status }}</td>
                                                 <td>
                                                     <div class="form-button-action m-auto">
                                                         <a href="{{ route('student.edit', $student->id) }}"
