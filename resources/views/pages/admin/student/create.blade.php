@@ -62,11 +62,21 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title">Form Elements</div>
+                                <div class="card-title">Form Input Data Siswa</div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="nis">Nomor Induk Siswa</label>
+                                            <input type="number" name="nis"
+                                                class="form-control  @error('nis') is-invalid @enderror" required>
+                                            @error('nis')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="name">Nama</label>
                                             <input type="text" name="name"
@@ -76,12 +86,54 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" name="email"
                                                 class="form-control  @error('email') is-invalid @enderror" required>
                                             @error('email')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="address">Alamat</label>
+                                            <textarea name="address" class="form-control @error('address') is-invalid @enderror" cols="30" required></textarea>
+                                            @error('address')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="provinces_id">Provinsi</label>
+                                            <select name="provinces_id" id="provinces_id" class="form-control"
+                                                v-model="provinces_id" v-if="provinces">
+                                                <option v-for="province in provinces" :value="province.id">
+                                                    @{{ province.name }}</option>
+                                            </select>
+                                            <select v-else class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="regencies_id">Kota/Kabupaten</label>
+                                            <select name="regencies_id" id="regencies_id" class="form-control"
+                                                v-model="regencies_id" v-if="regencies">
+                                                <option v-for="regency in regencies" :value="regency.id">
+                                                    @{{ regency.name }}</option>
+                                            </select>
+                                            <select v-else class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="number_phone">No. Telpon</label>
+                                            <input type="number" name="number_phone"
+                                                class="form-control  @error('number_phone') is-invalid @enderror"
+                                                required>
+                                            @error('number_phone')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -135,4 +187,43 @@
         <!-- Kaiadmin DEMO methods, don't include it in your project! -->
         <script src="{{ asset('assets/assets/js/setting-demo.js') }}"></script>
         <script src="{{ asset('assets/assets/js/demo.js') }}"></script>
+        <script src="{{ asset('assets/vendor/vue/vue.js') }}"></script>
+        <script src="https://unpkg.com/vue-toasted"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            var locations = new Vue({
+                el: "#locations",
+                mounted() {
+                    this.getProvincesData();
+                },
+                data: {
+                    provinces: null,
+                    regencies: null,
+                    provinces_id: null,
+                    regencies_id: null,
+                },
+                methods: {
+                    getProvincesData() {
+                        var self = this;
+                        axios.get('{{ route('api-provinces') }}')
+                            .then(function(response) {
+                                self.provinces = response.data;
+                            })
+                    },
+                    getRegenciesData() {
+                        var self = this;
+                        axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+                            .then(function(response) {
+                                self.regencies = response.data;
+                            })
+                    },
+                },
+                watch: {
+                    provinces_id: function(val, oldVal) {
+                        this.regencies_id = null;
+                        this.getRegenciesData();
+                    },
+                }
+            });
+        </script>
     @endsection

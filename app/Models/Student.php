@@ -12,8 +12,13 @@ class Student extends Model
     // use SoftDeletes;
 
     protected $fillable = [
+        'nis',
         'name',
         'email',
+        'address',
+        'provinces_id',
+        'regencies_id',
+        'number_phone'
     ];
 
     protected $hidden = [
