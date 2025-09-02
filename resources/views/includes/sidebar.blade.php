@@ -45,6 +45,13 @@
                         {{-- <span class="badge badge-secondary">1</span> --}}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('teacher.index') }}">
+                        <i class="fas fa-file"></i>
+                        <p>Data Guru</p>
+                        {{-- <span class="badge badge-secondary">1</span> --}}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

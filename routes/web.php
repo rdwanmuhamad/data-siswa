@@ -23,8 +23,12 @@ Route::prefix('admin')
         Route::get('/', 'DashboardController@index')->name('admin');
         Route::resource('user', 'UserController');
         Route::resource('student', 'StudentController');
+        Route::resource('teacher', 'TeacherController');
         Route::post('/student/import', 'StudentController@import')->name(
             'student.import'
+        );
+        Route::post('/teacher/import', 'TeacherController@import')->name(
+            'teacher.import'
         );
     });
 

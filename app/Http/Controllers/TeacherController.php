@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use App\Imports\TeacherImport;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\StudentImport;
-use RealRashid\SweetAlert\Facades\Alert;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-        return view('pages.admin.student.index', [
-            'students' => $students
+        $teachers = Teacher::all();
+        return view('pages.admin.teacher.index', [
+            'teachers' => $teachers
         ]);
     }
 
@@ -31,7 +31,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.student.create');
+        return view('pages.admin.teacher.create');
     }
 
     /**
@@ -43,9 +43,9 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Student::create($data);
+        Teacher::create($data);
         Alert::toast('Data berhasil disimpan!', 'success');
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -67,8 +67,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $item = Student::findOrFail($id);
-        return view('pages.admin.student.edit', [
+        $item = Teacher::findOrFail($id);
+        return view('pages.admin.teacher.edit', [
             'item' => $item
         ]);
     }
@@ -83,10 +83,10 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $item = Student::findOrFail($id);
+        $item = Teacher::findOrFail($id);
         $item->update($data);
         Alert::toast('Data berhasil diubah!', 'success');
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -97,10 +97,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $item = Student::findorFail($id);
+        $item = Teacher::findorFail($id);
         $item->delete();
         
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 
     public function import(Request $request)
@@ -118,18 +118,17 @@ class StudentController extends Controller
         $path = $file->storeAs('public/excel/',$file_name);
 
         // import data
-        $import = Excel::import(new StudentImport(), storage_path('app/public/excel/'.$file_name));
+        $import = Excel::import(new TeacherImport(), storage_path('app/public/excel/'.$file_name));
 
         //remove from server
         Storage::delete($path);
 
         if($import) {
             //redirect
-            return redirect()->route('student.index')->with(['success' => 'Data Berhasil Diimport!']);
+            return redirect()->route('teacher.index')->with(['success' => 'Data Berhasil Diimport!']);
         } else {
             //redirect
-            return redirect()->route('student.index')->with(['error' => 'Data Gagal Diimport!']);
+            return redirect()->route('teacher.index')->with(['error' => 'Data Gagal Diimport!']);
         }
     }
-
 }
